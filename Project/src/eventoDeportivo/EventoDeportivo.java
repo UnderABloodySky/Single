@@ -3,10 +3,11 @@ package eventoDeportivo;
 import java.util.ArrayList;
 import java.util.List;
 
-import casaDeApuesta.*;
+import casaDeApuestas.*;
 import estado.EstadoEventoDeportivo;
-import estado.NoComenzado;
+import estado.*;
 import oponentes.*;
+import resultados.*;
 
 public class EventoDeportivo {
 	
@@ -14,12 +15,14 @@ public class EventoDeportivo {
 	List<Oponente> oponentes;
 	String lugar; //String o clase?
 	EstadoEventoDeportivo estado;
+	Resultado resultado;
 	
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2) {
 			deporte = _deporte;
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
 			estado = new NoComenzado();
+			resultado = new Empate();
 		}
 
 			private void setOponentes(Oponente _oponente1, Oponente _oponente2) {
@@ -76,6 +79,27 @@ public class EventoDeportivo {
 			}
 
 			public Boolean empezo() {
-				return _estado.empezo();
+				return estado.empezo();
+			}
+			
+			public void setEstado(EstadoEventoDeportivo _estado) {
+				estado = _estado;
+			}
+			
+			public Resultado resultadoParcial() {
+				return resultado;
+			}
+			
+			//Este mensaje necesita que se mande en un momento justo y nunca a un partido finalizado
+			public void setResultado(Resultado _resultado) {
+				
+				if(this.estaFinalizado()) {
+					this.errorEventoTerminado();
+				}
+					resultado = _resultado;
+			}
+
+			private Exception errorEventoTerminado() {
+				return new Exception(" El evento no puede ser modificado ya que ha concluido. ");
 			}
 }

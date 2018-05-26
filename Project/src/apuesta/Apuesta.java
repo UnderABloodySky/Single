@@ -1,6 +1,6 @@
 package apuesta;
 
-import casaDeApuesta.CasaDeApuestas;
+import casaDeApuestas.CasaDeApuestas;
 import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 
