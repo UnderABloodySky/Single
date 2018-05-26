@@ -2,9 +2,7 @@ package oponentes;
 
 import java.sql.Date;
 
-import identificables.*;
-
-public class Deportista implements Oponente, Identificable{
+public class Deportista extends Oponentes{
 	String nombre;
 	String apellido;
 	Date fechaNacimiento;
@@ -30,11 +28,6 @@ public class Deportista implements Oponente, Identificable{
 	
 	private String getApellido() {
 		return apellido;
-	}
-
-	@Override
-	public Boolean es(Object _object) {
-		return this.hashCode() == _object.hashCode();
 	}
 	
 }

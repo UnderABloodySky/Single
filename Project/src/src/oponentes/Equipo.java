@@ -2,9 +2,7 @@ package oponentes;
 
 import java.util.List;
 
-import identificables.Identificable;
-
-public class Equipo implements Oponente, Identificable{
+public class Equipo extends Oponentes{
 	
 	private List<Deportista> plantel;
 	private String nombre;
@@ -27,12 +25,7 @@ public class Equipo implements Oponente, Identificable{
 				return nombre;
 			}
 
-			@Override
-			public Boolean es(Object _object) {
-				return new Boolean(this.hashCode() == _object.hashCode());
-			}
-
-			/*Lo agrego por flexibilidad. 
+			/*Lo agrego por flexibilidad, se me ocurren mas parecidos. Ejemplo, reemplazar un jugador por otro. 
 			public void agregarJugador(Deportista jugador) {
 				plantel.add(jugador);
 			}
