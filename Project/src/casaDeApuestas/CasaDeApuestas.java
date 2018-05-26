@@ -8,12 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 import algoritmo.*;
-import bbdd.BBDD;
-import bbdd.BaseDeDatos;
-import eventoDeportivo.EventoDeportivo;
-import notifier.BalanceNotifier;
-import notifier.TextMessageBalanceNotifier;
-import oponentes.Oponente;
+import bbdd.*;
+import eventoDeportivo.*;
+import notifier.*;
+import oponentes.*;
+import resultados.*;
 import usuario.User;
 
 public class CasaDeApuestas {
@@ -77,9 +76,8 @@ public class CasaDeApuestas {
 			private BigDecimal ganancias() {
 				return null;	
 			}
-
-
-			public Float calcularProbabilidadesDe(Oponente _oponente, EventoDeportivo _evento) {
-				return algoritmo.calcularProbabilidades(baseDeDatos, _oponente, _evento);
+			
+			public Float calcularProbabilidadesDe(EventoDeportivo _evento, Resultado _resultado) {
+				return algoritmo.calcularProbabilidades(baseDeDatos.eventosTerminados(), _resultado, _evento);
 			}
 }

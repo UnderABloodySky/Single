@@ -66,10 +66,16 @@ public class BaseDeDatos implements BBDD{
 			        			
 			        }
 					
-				}
-				
+				}	
 				
 				return historico;
 				
 			}
+
+			@Override
+			public List<EventoDeportivo> eventosTerminados() {
+				return historicoEventos;
+			}
+			
+			
 }

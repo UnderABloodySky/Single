@@ -1,20 +1,39 @@
 package algoritmo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import algoritmo.AlgoritmoProbabilidades;
-import bbdd.BBDD;
 import eventoDeportivo.EventoDeportivo;
-import oponentes.Oponente;
+import resultados.*;
 
 public class CompetenciaHistoricaDirecta implements AlgoritmoProbabilidades {
 
-	//Falta implementar
 	@Override
-	public Float calcularProbabilidades(BBDD _base, Oponente _oponente, EventoDeportivo _evento) {
-		// TODO Auto-generated method stub
-		return null;
+	public Float calcularProbabilidades(List<EventoDeportivo> eventosTotales, Resultado _resultado,
+			EventoDeportivo _eventoFinalizado) {
+		
+		List<EventoDeportivo> historico = new ArrayList<EventoDeportivo>(0);
+		
+		for (EventoDeportivo _evento : eventosTotales) {
+			if(_evento.participaronVs(_eventoFinalizado.primerOponente(), _eventoFinalizado.segundoOponente())) {
+				historico.add(_evento);
+			}
+		}
+		
+		Float resultado = new Float(0);
+		
+		//NO me gusta esta pregunta po identidad, pero acorta el laburo
+		for (EventoDeportivo otroEvento : historico) {
+			if(otroEvento.getResultado() == _resultado){
+				resultado += new Float(1); 
+			}
+		}
+		return resultado / historico.size();
 	}
 
-	//Competencia historica directa --> (cantidadDePartidosGanados * 0.5) /10
-	
-	//Historia reciente --> cantidadDeVictorias / 10; cambia por empatados.hay que delegarlo al estado ganado, perdido o empatado.
 }
+
+
+	
+
